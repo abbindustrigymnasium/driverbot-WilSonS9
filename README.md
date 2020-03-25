@@ -10,3 +10,6 @@ The website sends numbers via mqtt to the project's mqtt topic. The first number
 
 ## Future Development
 The project's team, me, is working hard on mounting a GoPro camera on the vehicle. This camera can be controlled via an app to live stream to Twitch. The current website in-development has embedded a Twitch live-stream, and when the live stream is set up and the camera is mounted, the live-stream will be shown on the website to allow for more efficient remote steering of the vehicle for purposes of, for example, fetching toilet paper or exploring unknown terrains.
+
+## LOG
+The log for the project is available at the log.md file
