@@ -3,6 +3,7 @@ This, ladies and gentlemen, is the official repository for the world-famous Vibe
 
 ## Website
 The official website is available at http://vibebotbucket.s3.amazonaws.com/joysticks3/nipplejs.html.
+NOTE: due to the fact that maqiatto, the mqtt broker that is used, doesn't support wss just ws, the site needs to be loaded with http, not https.
 
 ## How it works
 The actual vehicle is made with LEGO technic parts, and on the vehicle there's a TT-motor that propels the vehicle at the back wheels, and on top of the front wheels there is a servo that controls the steering.
