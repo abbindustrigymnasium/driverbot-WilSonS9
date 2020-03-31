@@ -6,3 +6,6 @@ Allt i kod-delen funkar perfekt, behöver bara bygga vidare på bilen
 
 ## 2020-03-24
 Till mestadels försökt (och misslyckats) med att förbättra bilens svängning, då servot svängs runt sig själv ibland vilket gör att själva bilen inte svänger lika mycket.
+
+## 2020-03-31
+Börjat konfigurera GoPro-kameran som ska mountas på bilen. Senare skall jag åka till Sp1sen och bygga robot och cadda hållare till GoPro
