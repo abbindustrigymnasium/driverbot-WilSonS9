@@ -1,128 +1,196 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>VibeBot</title>
-        <meta name="viewport" content="width=device-width, initial-scale=0.5, maximum-scale=0.5">
-        <style>
-        html, body {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            padding: 0;
-            margin: 0;
-        }
+  <head>
+    <meta charset="utf-8" />
+    <title>VibeBot</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=0.5, maximum-scale=0.5"
+    />
+    <style>
+      html,
+      body {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0;
+        margin: 0;
+      }
 
-        #all {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 255, 0, 0.1);
-        }
+/* Here, we define the area for the Nipple, where it can roam around and be used on the lower half of the website */
+      #all { 
+        position: absolute;
+        left: 0;
+        top: 50%;
+        height: 50%;
+        width: 100%;
+        background: rgba(0, 255, 0, 0.1);
+      }
 
-        center {
-            text-align: center;
-            font-size: 50px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            color: rgb(236, 160, 110);
-            margin: 5%;
-            text-transform: uppercase;
-        }
+/* Here, we just make some nice, centered, large text */
+      center {
+        text-align: center;
+        font-size: 50px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        color: rgb(236, 160, 110);
+        margin: 5%;
+        text-transform: uppercase;
+      }
 
-        #padder {
-            height: 10%;
-        }
+    </style>
+  </head>
+  <body>
+    <!-- In this div with the id "all", the nipple can be used. We also use some centered text to tell the users how to use the site -->
+    <div id="all">
+      <center>Click anywhere to create a joystick!</center>
+    </div>
 
-        </style>
-    </head>
-    <body>
-        <div id="all">
-            <!-- <div id="padder"></div> -->
-            <center>Click anywhere to create a joystick!</center>
-        </div>
-        <script src="./node_modules/nipplejs/dist/nipplejs.js"></script>
-        <script src="./node_modules/mqtt/dist/mqtt.js"></script>
-        <script>
-    var client = "";
-    var connected = false;
-    function connect() {
-      var mqtt_url = "maqiatto.com";
-      var url = "mqtt://" + mqtt_url;
-      var options = {
-        port: 8883,
-        clientId:
-          "nipleshaha" +
-          Math.random()
-            .toString(16)
-            .substr(2, 8),
-        username: "g3.vibestol@gmail.com",
-        password: "G3Vibestol2020"
-      };
-      // user = this.options.username
-      // pass = this.options.password
-      /* eslint-disable */
-      console.log("connecting");
-      client = mqtt.connect(url, options);
-      /* eslint-disable */
-      console.log("connected?");
-      client
-        .on("error", function(error) {
-          /* eslint-disable */
-          console.log("no");
-          connected = false;
-          /* eslint-disable */
-          console.log(connected);
-        })
-        .on("close", function(error) {
-          /* eslint-disable */
-          console.log("no");
-          connected = false;
-        });
-      connected = true;
-    }
-            let dir = 0;
-            let dist = 0;
-            let anger = 0;
-            let speed = 0;
-            let angle = 0;
-            var manager = nipplejs.create({
-                zone: document.getElementById('all'),
-                mode: 'dynamic',
-                color: 'green',
-                size: 400
-            });
-            bindNipple();
-
-            function bindNipple () {
-                manager.on('move', function (evt, data) {
-                    console.log(data);
-                    dist = data.distance;
-                    anger = data.angle.degree;
-                    speed = Math.round((dist / 200) * 1020).toString();
-                    speed = "0".repeat(4 - speed.length) + speed.toString();
-                    if (anger <= 180 ) {
-                        dir = "0";
-                        angle = Math.round(180 - anger).toString();
-                        angle = "0".repeat(3 - angle.length) + angle.toString();
-                    } else {
-                        dir = "1";
-                        angle = Math.round(anger - 180).toString();
-                        angle = "0".repeat(3 - angle.length) + angle.toString();
-                    }
-                    client.publish("g3.vibestol@gmail.com/motor", dir + speed + angle);
-                    console.log(dir + speed + angle);
-                    console.log()
-                })
-            }
-
-        window.onload = function () {
-            connect();
+    <!-- Here, we import our libraries nipple.js, mqtt.js and axios.js -->
+    <!-- Nipple.js is used for the joystick, mqtt.js for logging the data to our mqtt broker -->
+    <!-- And axios is used to log the data to our AWS DynamoDB database, to save for research purposes -->
+    <script src="./node_modules/nipplejs/dist/nipplejs.js"></script>
+    <script src="./node_modules/mqtt/dist/mqtt.js"></script>
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+      var client = "";
+      var connected = false;
+      // Here, we have a function that connects the local client, nipleshaha, to the mqtt broker, so it can publish things later
+      function connect() {
+        var mqtt_url = "maqiatto.com";
+        var url = "mqtt://" + mqtt_url;
+        var options = {
+          port: 8883,
+          clientId: "nipleshaha" + Math.random().toString(16).substr(2, 8),
+          username: "g3.vibestol@gmail.com",
+          password: "G3Vibestol2020",
         };
-        </script>
-    </body>
+        // It logs this while connecting
+        /* eslint-disable */
+        console.log("connecting");
+        client = mqtt.connect(url, options);
+        // It logs this when it is connected
+        /* eslint-disable */
+        console.log("connected!");
+        client
+          .on("error", function (error) {
+            // It logs this if it can't connect
+            /* eslint-disable */
+            console.log("no");
+            connected = false;
+            /* eslint-disable */
+            console.log(connected);
+          })
+          .on("close", function (error) {
+            // It logs this if the connection closes, like when the site is closed
+            /* eslint-disable */
+            console.log("no");
+            connected = false;
+          });
+        connected = true;
+      }
+      // Here, we define some variables, like the counter for the log, direction,
+      // And other things used to calculate the speed and angle that will be sent
+      let counter = 0;
+      let dir = 0;
+      let dist = 0;
+      let anger = 0;
+      let speed = 0;
+      let angle = 0;
+      let counter = 0;
+      // This creates the zone for the nipple
+      // The mode "dynamic" means that the nipple can show up anywhere in its zone if it gets clicked on
+      var manager = nipplejs.create({
+        zone: document.getElementById("all"),
+        mode: "dynamic",
+        color: "green",
+        size: 400,
+      });
+      bindNipple();
+
+      // This function determines what the website does after the nipple has been created
+      function bindNipple() {
+        // When the nipple moves, it logs the data inte the console
+        manager.on("move", function (evt, data) {
+          console.log(data);
+          // The data embedded in the nipple code is used to calculate the angle and speed
+          // The algorithm used to calculate speed goes like this:
+          // The speed is the distance of the center of the nipple from its original center divided by the circles radius
+          // Here, it is 200, as the nipples diameter is 400 pixels
+          // Then, that number is taken times 1020, which is the approximate highest value of the speed that the engine can recieve
+          // For example: the maximum speed is when the nipple is all the way at the edges
+          // Distance is then 200, so we only have 1 * 1020, which is the maximum value
+          dist = data.distance;
+          anger = data.angle.degree;
+          speed = Math.round((dist / 200) * 1020).toString();
+          speed = "0".repeat(4 - speed.length) + speed.toString();
+          // Here, we use an algorithm to calculate the angle to be sent to the driverbot. It goes like this:
+          // If the angle is between 0 and 180, the direction is 0, which is forward
+          // To fit the format of the servo, that 90 degrees is straight forward and 180 degrees straight right,
+          // The angle sent will be 180 degrees minus the nipples embedded angle, anger
+          // The nipple works so that 180 is straight to the left, which is the opposite of what the servo wants
+          // If the nipples angle is between 180 and 360, we do the opposite
+          // The angle sent will be anger minus 180, and the direction will be 1, backwards
+          // This way, the driverbot will travel in the direction of the joystick even when facing the opposite way of the traveling direction
+          if (anger <= 180) {
+            dir = "0";
+            angle = Math.round(180 - anger).toString();
+            angle = "0".repeat(3 - angle.length) + angle.toString();
+          } else {
+            dir = "1";
+            angle = Math.round(anger - 180).toString();
+            // Here, we get the angle to fit the format that we want to mqtt
+            // We want the angle to be exactly 3 digits long, and the speed to be 4 digits long
+            // If the angle is, for example, 90, we want it to write 090 instead
+            // The code below does that for the angle, and a bit later, there is some code that does the same thing for the speed
+            angle = "0".repeat(3 - angle.length) + angle.toString();
+          }
+          // This code publishes the direction, speed and angle to the mqtt topic, in which the arduino will eventually fetch the data
+          client.publish("g3.vibestol@gmail.com/motor", dir + speed + angle);
+          console.log(dir + speed + angle);
+          // Here, we do some logging, so that each 25th time the nipple is moved, we log that data to the database
+          // After the counter has reached 25, it resets to 0 so the loop can continue forever
+          if (counter == 25) {
+            sender(speed, angle, dir);
+            counter = 0;
+          }
+          counter += 1;
+        });
+      }
+
+      // This function sends the data to the AWS database
+      // The function used is a put function, and we just append and change some existing values
+      // Some things it does is change the current speed, current angle and current direction items in the database for the item VibeBot
+      function sender(speed, angle, dir) {
+        axios({
+          method: "put",
+          url:
+            "https://l9pd4ag08g.execute-api.us-east-1.amazonaws.com/DriverAPI/bot?name=VibeBot",
+          data: {
+            speed: speed,
+            angle: angle,
+            dir: dir,
+          },
+        });
+      }
+
+      // When the website is loaded, it will connect to mqtt with the connect function
+      window.onload = function () {
+        connect();
+      };
+    </script>
+  </body>
+  <!-- Here, we embed the twitch stream from my channel, where the stream from the GoPro will be -->
+  <!-- It exists in the top half of the site, which means that it will scale to smaller devices like phones and larger ones like pc's -->
+  <iframe
+    src="https://player.twitch.tv/?channel=nattensridare&parent=streamernews.example.com"
+    height="50%"
+    width="100%"
+    frameborder="0"
+    scrolling="no"
+    allowfullscreen="true"
+  >
+  </iframe>
 </html>
