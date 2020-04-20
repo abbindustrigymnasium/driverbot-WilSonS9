@@ -12,6 +12,7 @@ Lagt upp en stream på sidan, inte min stream, men nu vet jag hur det funkar och
 
 ## 2020-03-31
 Tillfälle 1: Börjat konfigurera GoPro-kameran som ska mountas på bilen. Senare skall jag åka till Sp1sen och bygga robot och cadda hållare till GoPro
+
 Tillfälle 2: GoPron kan sända live, ca. 5 sekunders delay men kan bero på dåligt wifi hemma, men 5 sekunders delay är ändå hanterbart, inga extremt snabba rörelser är nödvändiga om man skulle vilja använda den utanför ens synfält
 
 ## 2020-04-20
