@@ -16,3 +16,4 @@ Tillfälle 2: GoPron kan sända live, ca. 5 sekunders delay men kan bero på då
 
 ## 2020-04-20
 Har förbättrat bilens svängning med justeringar till hjulens distans från själva bilen. Har även kommenterat all kod samt gjort att allting som görs loggas till en AWS DynamoDB databas
+Har även arbetat med miniprojektet, då jag gärna ville ha upp lite grejer på en websida men jag gav upp då jag bestämde mig för att nöja mig med där jag är just nu med miniprojektet
