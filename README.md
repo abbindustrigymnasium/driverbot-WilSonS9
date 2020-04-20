@@ -7,7 +7,7 @@ The official website is available at http://vibebotbucket.s3.amazonaws.com/joyst
 
 ## How it works
 The actual vehicle is made with LEGO technic parts, and on the vehicle there's a TT-motor that propels the vehicle at the back wheels, and on top of the front wheels there is a servo that controls the steering.
-The website sends numbers via mqtt to the project's mqtt topic. The first number represents the direction, the next 4 the speed and the last 2 the angle of the servo. The ESP is subscribed to the topic with PubSubClient, and it then divides the payload into its 3 parts and sends these signals to the motor and servo.
+The website sends numbers via mqtt to the project's mqtt topic. The first number represents the direction, the next 4 the speed and the last 2 the angle of the servo. The ESP is subscribed to the topic with PubSubClient, and it then divides the payload into its 3 parts and sends these signals to the motor and servo. There is also an AWS back-end with a DynamoDB table as well as 2 lambda functions. This is used to log data, which has been a requirement for this project.
 
 ## Future Development
 The project's team, me, is working hard on mounting a GoPro camera on the vehicle. This camera can be controlled via an app to live stream to Twitch. The current website in-development has embedded a Twitch live-stream, and when the live stream is set up and the camera is mounted, the live-stream will be shown on the website to allow for more efficient remote steering of the vehicle for purposes of, for example, fetching toilet paper or exploring unknown terrains.
