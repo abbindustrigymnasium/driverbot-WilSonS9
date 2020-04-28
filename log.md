@@ -20,3 +20,6 @@ Har förbättrat bilens svängning med justeringar till hjulens distans från sj
 Har även arbetat med miniprojektet, då jag gärna ville ha upp lite grejer på en websida men jag gav upp då jag bestämde mig för att nöja mig med där jag är just nu med miniprojektet
 
 Den första test-streamen då en viss Martin Pind kunde styra driverboten tog plats idag mellan 14:10-14:30. Den gode herren lyckades navigera den runtom ett vardagsrum samt göra många imponerande donuts. Det verkar alltså vara möjligt att styra den även i mindre utrymmen och med hög delay
+
+## 2020-04-21
+Den andra test-streamen tog plats under detta tillfälle då både Martin Pind samt Ludvig Bylund lyckades köra denna driverbot, och denna gång gjordes det ännu mer effektivt än den första test-streamen då de lyckades köra driverboten runt vardagsrummet samt till köket, och de lyckades köra under ett bord och sedan ta sig ut från det genom att navigera runt stolben som befann sig i närheten
