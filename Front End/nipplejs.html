@@ -166,11 +166,11 @@
         axios({
           method: "put",
           url:
-            "https://l9pd4ag08g.execute-api.us-east-1.amazonaws.com/DriverAPI/bot?name=VibeBot",
+            "https://4fjsg79tjl.execute-api.us-east-1.amazonaws.com/DriverBotStage/bot?name=DriverBot",
           data: {
-            speed: speed,
-            angle: angle,
-            dir: dir,
+            speed: speed.toString(),
+            angle: angle.toString(),
+            dir: dir.toString(),
           },
         });
       }
