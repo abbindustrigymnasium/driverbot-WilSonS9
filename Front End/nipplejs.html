@@ -69,16 +69,16 @@
         };
         // It logs this while connecting
         /* eslint-disable */
-        console.log("connecting");
+        console.log("Connecting...");
         client = mqtt.connect(url, options);
         // It logs this when it is connected
         /* eslint-disable */
-        console.log("connected!");
+        console.log("Connected!");
         client
           .on("error", function (error) {
             // It logs this if it can't connect
             /* eslint-disable */
-            console.log("no");
+            console.log("Unable to connect");
             connected = false;
             /* eslint-disable */
             console.log(connected);
@@ -86,7 +86,7 @@
           .on("close", function (error) {
             // It logs this if the connection closes, like when the site is closed
             /* eslint-disable */
-            console.log("no");
+            console.log("Connection closed");
             connected = false;
           });
         connected = true;
@@ -113,7 +113,6 @@
       function bindNipple() {
         // When the nipple moves, it logs the data inte the console
         manager.on("move", function (evt, data) {
-          console.log(data);
           // The data embedded in the nipple code is used to calculate the angle and speed
           // The algorithm used to calculate speed goes like this:
           // The speed is the distance of the center of the nipple from its original center divided by the circles radius
@@ -148,7 +147,7 @@
           }
           // This code publishes the direction, speed and angle to the mqtt topic, in which the arduino will eventually fetch the data
           client.publish("g3.vibestol@gmail.com/motor", dir + speed + angle);
-          console.log(dir + speed + angle);
+          // console.log(dir + speed + angle);
           // Here, we do some logging, so that each 25th time the nipple is moved, we log that data to the database
           // After the counter has reached 25, it resets to 0 so the loop can continue forever
           if (counter == 25) {
