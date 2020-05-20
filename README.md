@@ -6,7 +6,7 @@ The official website is available at http://vibebotbucket.s3.amazonaws.com/joyst
       NOTE: due to the fact that maqiatto, the mqtt broker that is used, doesn't support wss just ws, the site needs to be loaded with http, not https.
 
 ## How it works
-The actual vehicle is made with LEGO technic parts, and on the vehicle there's a TT-motor that propels the vehicle at the back wheels, and on top of the front wheels there is a servo that controls the steering.
+The actual vehicle is made with LEGO technic parts, and on the vehicle there's a TT-engine that propels the vehicle at the back wheels, and on top of the front wheels there is a servo that controls the steering.
 The website sends numbers via mqtt to the project's mqtt topic. The first number represents the direction, the next 4 the speed and the last 2 the angle of the servo. The ESP is subscribed to the topic with PubSubClient, and it then divides the payload into its 3 parts and sends these signals to the motor and servo. There is also an AWS back-end with a DynamoDB table as well as 2 lambda functions. This is used to log data, which has been a requirement for this project.
 
 ## Live Streaming
