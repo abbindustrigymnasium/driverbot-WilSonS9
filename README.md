@@ -12,5 +12,8 @@ The website sends numbers via mqtt to the project's mqtt topic. The first number
 ## Live Streaming
 During the tests where other people have been able to control the driverbot, a GoPro Hero 7 Black has been mounted on it to live stream the view from the driverbot. This has been quite effective during the test drives, as the remote drivers were able to navigate across 2 rooms in the test house as well as drive out of a sticky situation under a table, with many chairs as an obstacle. The current delay is between 5-15 seconds, most likely due to the GoPro and Twitch both being a bit slow, and currently there doesn't seem to be a way to cut it down. However, the test drivers were able to drive it, so the delay isn't devastating.
 
+## How it works
+![Diagram!](/ReadmeBilder/DiagramDriverbot.PNG)
+
 ## LOG
 The log for the project is available at the log.md file
