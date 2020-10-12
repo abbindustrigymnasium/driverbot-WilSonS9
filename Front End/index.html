@@ -133,11 +133,11 @@
           // The angle sent will be anger minus 180, and the direction will be 1, backwards
           // This way, the driverbot will travel in the direction of the joystick even when facing the opposite way of the traveling direction
           if (anger <= 180) {
-            dir = "0";
+            dir = "1";
             angle = Math.round(180 - anger).toString();
             angle = "0".repeat(3 - angle.length) + angle.toString();
           } else {
-            dir = "1";
+            dir = "0";
             angle = Math.round(anger - 180).toString();
             // Here, we get the angle to fit the format that we want to mqtt
             // We want the angle to be exactly 3 digits long, and the speed to be 4 digits long
